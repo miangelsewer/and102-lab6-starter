@@ -24,7 +24,9 @@ class DetailActivity : AppCompatActivity() {
             park != null -> {
                 detailTitleTextView.text = park.fullName
                 detailDescriptionTextView.text = park.description
-                Glide.with(this).load(park.imageUrl).into(detailImageView)
+                if (!park.images.isNullOrEmpty()) {
+                    Glide.with(this).load(park.images[0].url).into(detailImageView)
+                }
             }
             campground != null -> {
                 detailTitleTextView.text = campground.name

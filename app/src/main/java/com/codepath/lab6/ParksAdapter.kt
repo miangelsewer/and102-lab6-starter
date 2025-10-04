@@ -21,15 +21,16 @@ class ParksAdapter(private val context: Context, private val parks: List<Park>) 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(parks[position])
+        val park = parks[position]
+        holder.bind(park)
     }
 
     override fun getItemCount() = parks.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        private val parkImageView: ImageView = itemView.findViewById(R.id.itemParkImage)
-        private val parkNameTextView: TextView = itemView.findViewById(R.id.itemParkTitle)
-        private val parkDescriptionTextView: TextView = itemView.findViewById(R.id.itemParkDescription)
+        private val parkNameTextView = itemView.findViewById<TextView>(R.id.itemParkTitle)
+        private val parkDescriptionTextView = itemView.findViewById<TextView>(R.id.itemParkDescription)
+        private val parkImageView = itemView.findViewById<ImageView>(R.id.itemParkImage)
 
         init {
             itemView.setOnClickListener(this)
@@ -38,7 +39,12 @@ class ParksAdapter(private val context: Context, private val parks: List<Park>) 
         fun bind(park: Park) {
             parkNameTextView.text = park.fullName
             parkDescriptionTextView.text = park.description
-            Glide.with(context).load(park.imageUrl).into(parkImageView)
+
+            if (!park.images.isNullOrEmpty()) {
+                Glide.with(context)
+                    .load(park.images[0].url)
+                    .into(parkImageView)
+            }
         }
 
         override fun onClick(v: View?) {
