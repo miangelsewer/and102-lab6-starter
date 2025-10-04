@@ -2,7 +2,7 @@
 
 Submitted by: **Mi'Angel Sewer**
 
-**Campgrounds App** is an Android app that allows users to browse both parks and campgrounds.
+**Parks and Campground Explorer App** is an Android app that allows users to browse both parks and campgrounds.
 
 Time spent: **15** hours spent in total
 
